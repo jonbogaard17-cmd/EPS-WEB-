@@ -1,31 +1,49 @@
-const API_KEY = "53afb9ea38c0487294de76657b69abf2";
+const RSS_URL = "https://api.rss2json.com/v1/api.json?rss_url=";
+
+const sources = [
+  "http://feeds.bbci.co.uk/news/rss.xml",
+  "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
+  "https://feeds.a.dj.com/rss/RSSWorldNews.xml"
+];
 
 async function loadNews() {
   const container = document.getElementById("news-container");
+  container.innerHTML = "Cargando noticias...";
 
   try {
-    const res = await fetch(
-      `https://newsapi.org/v2/top-headlines?language=en&pageSize=8&apiKey=${API_KEY}`
-    );
+    let allArticles = [];
 
-    const data = await res.json();
+    for (let source of sources) {
+      const res = await fetch(RSS_URL + encodeURIComponent(source));
+      const data = await res.json();
+
+      if (data.items) {
+        allArticles = allArticles.concat(data.items);
+      }
+    }
+
+    // mezclar noticias
+    allArticles.sort(() => 0.5 - Math.random());
+
+    // coger 8
+    const selected = allArticles.slice(0, 8);
 
     container.innerHTML = "";
 
-    data.articles.forEach(article => {
+    selected.forEach(article => {
       const div = document.createElement("div");
       div.classList.add("article");
 
       div.onclick = () => {
-        window.open(article.url, "_blank");
+        window.open(article.link, "_blank");
       };
 
       div.innerHTML = `
-        <img src="${article.urlToImage || 'https://via.placeholder.com/300'}">
+        <img src="${article.thumbnail || 'https://via.placeholder.com/300'}">
         <div class="article-content">
           <h3>${article.title}</h3>
-          <p>${article.description || ''}</p>
-          <div class="source">${article.source.name}</div>
+          <p>${article.description.substring(0, 100)}...</p>
+          <div class="source">${article.author || 'Fuente externa'}</div>
         </div>
       `;
 
@@ -33,7 +51,8 @@ async function loadNews() {
     });
 
   } catch (error) {
-    console.error("Error:", error);
+    container.innerHTML = "Error cargando noticias";
+    console.error(error);
   }
 }
 

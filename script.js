@@ -1,111 +1,117 @@
-// script.js - Versión mejorada y profesional
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Smooth scrolling para los enlaces del navbar
-    const smoothScrollLinks = document.querySelectorAll('a[href^="#"]');
-    
-    smoothScrollLinks.forEach(link => {
-        link.addEventListener('click', function (e) {
-            const targetId = this.getAttribute('href');
-            
-            // Ignorar enlaces vacíos o externos
-            if (targetId === '#' || targetId === '') return;
-            
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                e.preventDefault();
-                
-                const navbarHeight = document.querySelector('.navbar') ? 
-                                   document.querySelector('.navbar').offsetHeight : 80;
-                
-                const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.scrollY - navbarHeight - 20;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-
-    // Efecto de scroll en navbar (añade sombra cuando se hace scroll)
-    const navbar = document.querySelector('.navbar');
-    
-    if (navbar) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-    }
-
-    // Animación sutil al cargar las tarjetas de noticias (opcional pero elegante)
-    const newsCards = document.querySelectorAll('.news-card');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }, index * 80); // Pequeño delay entre tarjetas
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    });
-
-    newsCards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-        observer.observe(card);
-    });
-
-    // Feedback visual al hacer clic en botones (ripple effect ligero)
-    const buttons = document.querySelectorAll('.btn-primary, .btn-secondary, .whitepaper-button');
-    
-    buttons.forEach(button => {
-        button.addEventListener('mousedown', function(e) {
-            const ripple = document.createElement('span');
-            ripple.style.position = 'absolute';
-            ripple.style.borderRadius = '50%';
-            ripple.style.background = 'rgba(255,255,255,0.3)';
-            ripple.style.transform = 'scale(0)';
-            ripple.style.animation = 'ripple 0.6s linear';
-            ripple.style.left = `${e.offsetX}px`;
-            ripple.style.top = `${e.offsetY}px`;
-            ripple.style.width = '20px';
-            ripple.style.height = '20px';
-            ripple.style.pointerEvents = 'none';
-            
-            this.style.position = 'relative';
-            this.style.overflow = 'hidden';
-            this.appendChild(ripple);
-            
-            setTimeout(() => ripple.remove(), 600);
-        });
-    });
-
-    console.log('%cEPSEL website script cargado correctamente ✅', 'color: #10b981; font-weight: 600;');
-});
-
-// Añade esta regla CSS extra al final de tu styles.css para que funcione el efecto de navbar scrolled y ripple
-/*
-.navbar.scrolled {
-    background: rgba(10, 10, 10, 0.98);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-@keyframes ripple {
-    to {
-        transform: scale(4);
-        opacity: 0;
-    }
+body {
+  background: #000;
+  color: #fff;
 }
-*/
+
+/* HEADER */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background: rgba(0,0,0,0.8);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+header nav a {
+  margin-left: 20px;
+  color: #fff;
+  text-decoration: none;
+}
+
+header nav a:hover {
+  color: #aaa;
+}
+
+/* HERO */
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  text-align: center;
+}
+
+.hero h2 {
+  font-size: 48px;
+  max-width: 700px;
+}
+
+.hero button {
+  padding: 12px 30px;
+  border: 1px solid white;
+  background: transparent;
+  color: white;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.hero button:hover {
+  background: white;
+  color: black;
+}
+
+/* NEWS */
+.news {
+  padding: 100px 40px;
+}
+
+#news-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.article {
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.article img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.article-content {
+  padding: 15px;
+}
+
+.source {
+  font-size: 12px;
+  color: #666;
+}
+
+/* ABOUT */
+.about {
+  padding: 100px 40px;
+}
+
+.problem {
+  margin-top: 20px;
+}
+
+/* FOOTER */
+footer {
+  padding: 40px;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+footer a {
+  margin: 0 10px;
+  color: white;
+}

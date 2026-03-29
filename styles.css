@@ -18,7 +18,7 @@ header {
   display: flex;
   justify-content: space-between;
   padding: 20px 40px;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.9);
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
@@ -78,6 +78,11 @@ header nav a:hover {
   border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
+  transition: 0.3s;
+}
+
+.article:hover {
+  transform: translateY(-5px);
 }
 
 .article img {
@@ -114,4 +119,5 @@ footer {
 footer a {
   margin: 0 10px;
   color: white;
+  text-decoration: none;
 }

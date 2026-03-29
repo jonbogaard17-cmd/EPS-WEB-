@@ -3,152 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EPSEL • Dinero sin fricciones</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-  <style>
-    body { font-family: 'Inter', system-ui, sans-serif; }
-    .hero { background: linear-gradient(180deg, #0a0a0a 0%, #111111 100%); }
-    .nav-scrolled { background: rgba(10,10,10,0.98) !important; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
-    .card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-    .card:hover { transform: translateY(-12px); box-shadow: 0 25px 50px -12px rgb(16 185 129 / 0.15); }
-  </style>
+  <title>EPSEL</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-[#0a0a0a] text-white">
+<body>
 
-  <!-- NAVBAR PREMIUM -->
-  <nav class="fixed top-0 w-full bg-black/90 backdrop-blur-xl border-b border-white/10 z-50 transition-all">
-    <div class="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 bg-emerald-500 text-black font-bold text-3xl rounded-2xl flex items-center justify-center">EPS</div>
-        <span class="text-3xl font-semibold tracking-tighter">EPSEL</span>
-      </div>
-
-      <div class="hidden md:flex items-center gap-10 text-lg font-medium">
-        <a href="#hero" class="hover:text-emerald-400 transition">Inicio</a>
-        <a href="#noticias" class="hover:text-emerald-400 transition">Noticias</a>
-        <a href="#que-es" class="hover:text-emerald-400 transition">Qué es EPSEL</a>
-        <a href="#whitepaper" class="hover:text-emerald-400 transition">Whitepaper</a>
-      </div>
-
-      <div class="flex items-center gap-4">
-        <a href="https://x.com/epscoin" target="_blank" class="flex items-center gap-3 px-6 py-3 bg-white/10 hover:bg-white/20 rounded-3xl text-sm font-medium">
-          <i class="fa-brands fa-x-twitter"></i> @epscoin
-        </a>
-        <a href="#whitepaper" class="px-8 py-3 bg-emerald-500 hover:bg-emerald-600 text-black font-semibold rounded-3xl">Whitepaper</a>
-      </div>
-    </div>
-  </nav>
+  <!-- HEADER -->
+  <header>
+    <h1>EPSEL</h1>
+    <nav>
+      <a href="#news">Noticias</a>
+      <a href="#about">EPSEL</a>
+      <a href="#footer">Contacto</a>
+    </nav>
+  </header>
 
   <!-- HERO -->
-  <section id="hero" class="hero min-h-screen flex items-center pt-20">
-    <div class="max-w-6xl mx-auto px-8 text-center">
-      <h1 class="text-6xl md:text-7xl font-bold tracking-tighter leading-none mb-6">
-        Dinero que se mueve<br>como un mensaje.
-      </h1>
-      <p class="text-2xl text-gray-400 max-w-2xl mx-auto mb-12">
-        Inmediato. Sin bancos. Sin esperas.<br>
-        La nueva infraestructura financiera descentralizada.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-5 justify-center">
-        <a href="#que-es" class="px-10 py-6 bg-emerald-500 hover:bg-emerald-600 text-black text-xl font-semibold rounded-3xl">Conocer EPSEL</a>
-        <a href="https://x.com/epscoin" target="_blank" class="px-10 py-6 border border-white/30 hover:border-white/60 text-xl font-semibold rounded-3xl flex items-center gap-3">
-          <i class="fa-brands fa-x-twitter"></i> Seguir en X
-        </a>
-      </div>
-    </div>
+  <section class="hero">
+    <h2>Tu dinero. Sin bancos. Sin límites</h2>
+    <button onclick="scrollToNews()">Explorar</button>
   </section>
 
   <!-- NOTICIAS -->
-  <section id="noticias" class="py-28">
-    <div class="max-w-7xl mx-auto px-8">
-      <div class="flex justify-between items-baseline mb-12">
-        <h2 class="text-5xl font-semibold tracking-tighter">Noticias del mercado</h2>
-        <p class="text-emerald-400 text-sm">Actualizado cada 24 horas • Fuentes líderes</p>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Tarjetas premium (8) -->
-        <a href="https://www.reuters.com" target="_blank" class="card bg-[#111] rounded-3xl overflow-hidden block">
-          <img src="https://picsum.photos/id/1015/800/500" class="w-full h-56 object-cover">
-          <div class="p-6">
-            <div class="text-emerald-400 text-sm mb-3">The Wall Street Journal • 29 Mar 2026</div>
-            <h3 class="text-xl font-semibold leading-tight mb-3">Institutions accelerate crypto adoption amid regulatory clarity</h3>
-            <p class="text-gray-400 text-sm line-clamp-3">Major banks and hedge funds continue integrating blockchain into traditional finance.</p>
-          </div>
-        </a>
-
-        <!-- Repite el mismo bloque 7 veces más con diferentes imágenes y títulos (puedo darte las 8 completas si quieres) -->
-        <!-- Por ahora te pongo solo una para que veas el estilo. Dime "dame las 8" y te las completo. -->
-      </div>
-    </div>
+  <section id="news" class="news">
+    <h2>Noticias del mundo</h2>
+    <div id="news-container"></div>
   </section>
 
-  <!-- QUÉ ES EPSEL -->
-  <section id="que-es" class="py-28 bg-black">
-    <div class="max-w-5xl mx-auto px-8">
-      <h2 class="text-5xl font-semibold tracking-tighter text-center mb-8">¿Qué es EPSEL ($EPS)?</h2>
-      <p class="text-center text-xl text-gray-400 max-w-2xl mx-auto mb-16">
-        EPSEL es un ecosistema financiero descentralizado. No es solo una moneda… es una herramienta tecnológica para que el dinero se mueva sin fricciones, sin bancos y sin esperas.
-      </p>
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <h2>¿Qué es EPSEL ($EPS)?</h2>
 
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-[#111] p-10 rounded-3xl">
-          <h4 class="text-emerald-400 text-xl mb-5">El “Impuesto Revolucionario” de los Bancos</h4>
-          <p class="text-gray-300">Problema: Intermediarios que se llevan comisiones y tardan días.<br><br><strong>Solución EPSEL:</strong> Transacciones inmediatas P2P. Coste casi cero.</p>
-        </div>
-        <div class="bg-[#111] p-10 rounded-3xl">
-          <h4 class="text-emerald-400 text-xl mb-5">La Inflación</h4>
-          <p class="text-gray-300">Problema: Gobiernos imprimiendo dinero sin límite.<br><br><strong>Solución EPSEL:</strong> Suministro máximo fijo. Dinero duro que conserva valor.</p>
-        </div>
-        <div class="bg-[#111] p-10 rounded-3xl">
-          <h4 class="text-emerald-400 text-xl mb-5">Exclusión y Control</h4>
-          <p class="text-gray-300">Problema: Bancos pueden congelar tu cuenta.<br><br><strong>Solución EPSEL:</strong> Incensurable. Tú tienes el control total con tus llaves.</p>
-        </div>
-      </div>
+    <p>
+      EPSEL es un ecosistema financiero descentralizado. No es solo una moneda;
+      es una herramienta diseñada para que el dinero se mueva sin fricciones,
+      sin bancos y sin esperas.
+    </p>
+
+    <h3>Problemas que resuelve</h3>
+
+    <div class="problem">
+      <h4>El “Impuesto” de los bancos</h4>
+      <p>Intermediarios cobran comisiones y retrasan pagos.</p>
+      <p><strong>Solución:</strong> Transacciones directas, instantáneas y casi gratis.</p>
+    </div>
+
+    <div class="problem">
+      <h4>La inflación</h4>
+      <p>El dinero pierde valor con el tiempo.</p>
+      <p><strong>Solución:</strong> Suministro limitado, no manipulable.</p>
+    </div>
+
+    <div class="problem">
+      <h4>Control y bloqueo</h4>
+      <p>Los bancos pueden limitar tu dinero.</p>
+      <p><strong>Solución:</strong> Control total con tus llaves privadas.</p>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer id="whitepaper" class="py-20 border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-10">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 bg-emerald-500 text-black font-bold text-3xl rounded-2xl flex items-center justify-center">EPS</div>
-        <span class="text-3xl font-semibold tracking-tighter">EPSEL</span>
-      </div>
-
-      <a href="https://x.com/epscoin" target="_blank" class="flex items-center gap-4 text-2xl hover:text-emerald-400 transition">
-        <i class="fa-brands fa-x-twitter"></i>
-        <span>@epscoin</span>
-      </a>
-
-      <a href="https://tu-link-al-whitepaper.pdf" target="_blank" class="px-8 py-5 bg-white text-black font-semibold rounded-3xl flex items-center gap-3 hover:bg-emerald-400 hover:text-white">
-        <i class="fa-solid fa-file-pdf"></i>
-        Descargar Whitepaper
-      </a>
-
-      <p class="text-gray-500 text-sm">© 2026 EPSEL. Todos los derechos reservados.</p>
-    </div>
+  <footer id="footer">
+    <a href="https://x.com/epscoin?s=11" target="_blank">X (Twitter)</a>
+    <a href="#">Whitepaper</a>
   </footer>
 
-  <script>
-    // Smooth scroll + navbar effect
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener("click", function(e) {
-        if (this.getAttribute("href") !== "#") {
-          e.preventDefault();
-          document.querySelector(this.getAttribute("href")).scrollIntoView({ behavior: "smooth" });
-        }
-      });
-    });
-
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 100) {
-        document.querySelector('nav').classList.add('nav-scrolled');
-      } else {
-        document.querySelector('nav').classList.remove('nav-scrolled');
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
